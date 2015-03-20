@@ -93,12 +93,13 @@ a.navbar-brand, .nav-pills li a, a:hover {
     }
 }
 
-/* Position glyphs to the left of centered */
+/* Pad glyphs when beside text on x-small screens */
 @media (max-width: 767px) {
     .offset-glyph {
         padding: 0 5px;
     }
 }
+/* Position glyphs to the left of left-justified columns on small and larger screens */
 @media (min-width: 768px) {
     .offset-glyph {
         position: absolute;
@@ -111,6 +112,7 @@ a.navbar-brand, .nav-pills li a, a:hover {
         left: -20px;
     }
 }
+/* Invisible glpyhs for spacing */
 .hide-glyph {
-    color:rgba(0,0,0,0);
+    color:rgba(255,255,255,0);
 }
