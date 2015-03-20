@@ -76,11 +76,41 @@ a.navbar-brand, .nav-pills li a, a:hover {
 }
 
 /* Smaller buttons on mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .nav > li > a {
         padding: 6px 9px;
     }
     .nav-pills > li + li {
         margin-left: -2px;
     }
+}
+
+/* Centre columns */
+@media (max-width: 767px) {
+    .col-centered {
+        text-align: center;
+        position: relative;
+    }
+}
+
+/* Position glyphs to the left of centered */
+@media (max-width: 767px) {
+    .offset-glyph {
+        padding: 0 5px;
+    }
+}
+@media (min-width: 768px) {
+    .offset-glyph {
+        position: absolute;
+        left: -10px;
+        top: 5px;
+    }
+}
+@media (min-width: 992px) {
+    .offset-glyph {
+        left: -20px;
+    }
+}
+.hide-glyph {
+    color:rgba(0,0,0,0);
 }
