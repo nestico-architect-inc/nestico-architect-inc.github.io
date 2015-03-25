@@ -7,9 +7,10 @@
 {% if base.name %}
     {% assign name = base.name %}
 {% else %}
-    {% assign name = page.title | downcase | replace: " ", "-" %}
+    {% assign name = page.title %}
 {% endif %}
 
+{% assign name = name | downcase | replace: " ", "-" %}
 {% assign mapName = name | append: 'Map' %}
 
 {% if base.zoom %}
@@ -18,10 +19,11 @@
     {% assign zoom = 12 %}
 {% endif %}
 
-{% capture mapCoords %}{{ base.lat }}, {{ base.lng }}{% endcapture %}
+{% comment %}
+    Capture marker coordinates and info
+{% endcomment %}
 
 {% for location in map %}
-
     {% comment %}
         Backslash after all but the last line of captures is needed to make the capture a valid JS string
     {% endcomment %}
@@ -36,6 +38,11 @@
     {% endcapture %}
 
     {% capture coords %}{{ location.lat }}, {{ location.lng }}{% endcapture %}
+
+    {% capture bounds %}
+        {{ bounds | append: 'latlngbounds.extend(new google.maps.LatLng(' | append: coords | append: '));' }}
+    {% endcapture %}
+
     {% assign place = location.info[0] | downcase | replace: " ", "" | replace: ".", "" %}
     {% assign currMarker = place | append: 'Marker' %}
     {% assign currWindow = place | append: 'InfoWindow' %}
@@ -48,19 +55,12 @@
     {% endcapture %}
 
     {% capture markers %}
-        {{ markers | append: marker | append: '__split__' }}
+        {{ markers | append: marker }}
     {% endcapture %}
-
-    {% capture bounds %}
-        {{ bounds | append: 'latlngbounds.extend(new google.maps.LatLng(' | append: coords | append: '));' }}
-    {% endcapture %}
-
 {% endfor %}
 
-{% assign markerArray = markers | split: '__split__' %}
-
 {% comment %}
-    Map printing
+    Draw map
 {% endcomment %}
 
 <div id="{{ name }}"></div>
@@ -78,11 +78,10 @@
     var mapCanvas = document.getElementById("{{ name }}");
     var mapOptions = {
       zoom: {{ zoom }},
-      center: new google.maps.LatLng({{ mapCoords }}),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var {{ mapName }} = new google.maps.Map(mapCanvas, mapOptions);
-    {% for marker in markerArray %}{{ marker }}{% endfor %}
+    {{ markers }}
 
     // Dynamically set zoom level if points are too spread out
     // Event listener prevents zooming in below default zoom
