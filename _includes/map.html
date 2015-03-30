@@ -11,7 +11,7 @@
 {% endif %}
 
 {% assign name = name | downcase | replace: " ", "-" %}
-{% assign mapName = name | append: 'Map' %}
+{% assign mapName = 'map' | append: name %}
 
 {% if base.zoom %}
     {% assign zoom = base.zoom %}
@@ -32,7 +32,7 @@
             {% if item == location.info[0] %}\
                 <b>{{ item }}</b>\
             {% else %}\
-                </br>{{ item }}\
+                <br/>{{ item }}\
             {% endif %}\
         {% endfor %}\
     {% endcapture %}
