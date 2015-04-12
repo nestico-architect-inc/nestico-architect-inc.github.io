@@ -85,9 +85,9 @@ a.navbar-brand, .nav-pills li a, a:hover {
     }
 }
 
-/* Centre columns */
+/* Centre columns in contact page */
 @media (max-width: 767px) {
-    .col-centered {
+    .col-centered-contact {
         text-align: center;
         position: relative;
     }
@@ -115,4 +115,9 @@ a.navbar-brand, .nav-pills li a, a:hover {
 /* Invisible glpyhs for spacing */
 .hide-glyph {
     color:rgba(255,255,255,0);
+}
+
+/* img */
+img {
+    width: 100%;
 }
