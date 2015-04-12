@@ -43,9 +43,11 @@
       <ul class="nav nav-pills">
         {% assign pages_array = site.pages | sort: 'order' %}
         {% for node in pages_array %}
-          <li class="{% if node.url == page.url %}active{% endif %}">
-            <a href="{{ node.url }}">{{ node.title }}</a>
-          </li>
+          {% if node.layout == "default" %}
+            <li class="{% if node.url == page.url %}active{% endif %}">
+              <a href="{{ node.url }}">{{ node.title }}</a>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
