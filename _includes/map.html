@@ -10,7 +10,7 @@
     {% assign name = page.title %}
 {% endif %}
 
-{% assign name = name | downcase | replace: " ", "-" %}
+{% assign name = name | downcase | replace: " ", "" %}
 {% assign mapName = 'map' | append: name %}
 
 {% if base.zoom %}
@@ -18,6 +18,14 @@
 {% else %}
     {% assign zoom = 12 %}
 {% endif %}
+
+{% comment %}
+    Ensure iteratively captured variables are empty
+{% endcomment %}
+
+{% assign info = "" %}
+{% assign bounds = "" %}
+{% assign markers = "" %}
 
 {% comment %}
     Capture marker coordinates and info
@@ -43,15 +51,17 @@
         {{ bounds | append: 'latlngbounds.extend(new google.maps.LatLng(' | append: coords | append: '));' }}
     {% endcapture %}
 
-    {% assign place = location.info[0] | downcase | replace: " ", "" | replace: ".", "" %}
-    {% assign currMarker = place | append: 'Marker' %}
-    {% assign currWindow = place | append: 'InfoWindow' %}
+    {% assign place = location.info[0] | downcase | replace: " ", "" | replace: ".", "" | replace: "-", "" %}
+    {% assign currMarker = 'marker' | append: place %}
+    {% assign currWindow = 'infoWindow' | append: place %}
 
     {% capture marker %}
         var {{ currMarker }} = new google.maps.Marker( {map: {{ mapName }}, position: new google.maps.LatLng({{ coords }})} );
         var {{ currWindow }} = new google.maps.InfoWindow( {content:"{{ info }}"} );
         google.maps.event.addListener({{ currMarker }}, "click", function(){ {{ currWindow }}.open({{ mapName }}, {{ currMarker }});} );
-        {{ currWindow }}.open({{ mapName }}, {{ currMarker }});
+        {% if location.popup %}
+            {{ currWindow }}.open({{ mapName }}, {{ currMarker }});
+        {% endif %}
     {% endcapture %}
 
     {% capture markers %}
@@ -63,9 +73,9 @@
     Draw map
 {% endcomment %}
 
-<div id="{{ name }}"></div>
+<div id="{{ mapName }}"></div>
 <style>
-  #{{ name }} {
+  #{{ mapName }} {
     width: 100%;
     height: 50vh;
   }
@@ -75,7 +85,7 @@
 
 <script type="text/javascript">
   function initialize(){
-    var mapCanvas = document.getElementById("{{ name }}");
+    var mapCanvas = document.getElementById("{{ mapName }}");
     var mapOptions = {
       zoom: {{ zoom }},
       mapTypeId: google.maps.MapTypeId.ROADMAP
