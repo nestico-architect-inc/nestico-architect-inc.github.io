@@ -3,13 +3,8 @@ layout: default
 title: Contact
 order: 3
 
-map:
-  - lat: 43.8137709
-    lng: -79.52579579999997
-    info:
-      - Nestico Architect Inc.
-      - 7-3000 Langstaff Road
-      - Concord, ON, L4K 4R7
+location:
+  name: Nestico Architect Inc.
 ---
 
 <div class="row">
@@ -44,6 +39,6 @@ map:
     </div>
   </div>
   <div class="col-xs-12 col-md-9">
-    {% assign map=page.map %}{% include map.html map=map %}
+    {% assign location=page.location %}{% include location.html location=location %}
   </div>
 </div>

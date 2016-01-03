@@ -2,4 +2,71 @@
 layout: default
 title: Projects
 order: 2
+
+mapgta:
+  - name: gta
+    info:
+    - Toronto
+    lng: -79.38318429999998
+    lat: 43.653226
+  - info:
+    - Brampton
+    lng: -79.76666699999998
+    lat: 43.683333
+  - info:
+    - Caledon
+    lng: -80.0
+    lat: 43.866667
+  - info:
+    - Mississauga
+    lng: -79.6441198
+    lat: 43.5890452
+  - info:
+    - Milton
+    lng: -79.8774042
+    lat: 43.5182991
+  - info:
+    - Oakville
+    lng: -79.68766590000001
+    lat: 43.467517
+  - info:
+    - Richmond Hill
+    lng: -79.44028079999998
+    lat: 43.8828401
+  - info:
+    - Vaughan
+    lng: -79.50827600000004
+    lat: 43.8372079
+mapcanada:
+  - name: canada
+    info:
+    - Niagara-on-the-Lake
+    lng: -79.07726159999999
+    lat: 43.2549988
+  - info:
+    - Kingston
+    lng: -76.48595439999997
+    lat: 44.2311717
 ---
+
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <h2 class="text-center">
+            Greater Toronto Area
+        </h2>
+        {% assign map=page.mapgta %}{% include map.html map=map %}
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <h2 class="text-center">
+            Canada
+        </h2>
+        {% assign map=page.mapcanada %}{% include map.html map=map %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h2 class="text-center">
+            International
+        </h2>
+    </div>
+</div>

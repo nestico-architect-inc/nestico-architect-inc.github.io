@@ -11,7 +11,7 @@ layout: default
         <img src="{{ page.url }}/{{ page.image[1] }}">
     </div>
     <div class="col-xs-12 col-md-6">
-        {% assign map=page.map %}{% include map.html map=map %}
+        {% assign location=page.location %}{% include location.html location=location %}
     </div>
 </div>
 {% if page.image[2] %}
