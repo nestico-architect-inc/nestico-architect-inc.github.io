@@ -29,13 +29,20 @@
   <link href="/assets/reset.css" rel="stylesheet">
 
   <script type="text/javascript">
-    var numPics = 1;
+    var numPics = 9;
     function PickBackground()
     {
       var chosenPic = Math.ceil( Math.random() * numPics );
       document.getElementById("full").style.backgroundImage = 'url(gallery/Photo'+chosenPic+'.jpg)';
     }
   </script>
+  <noscript>
+    <style type="text/css">
+      #full {
+        background-image: url('/gallery/Photo9.jpg');
+      }
+    </style>
+  </noscript>
 
 </head>
 <body id="full">
@@ -75,6 +82,6 @@
   </footer>
 </body>
 <script type="text/javascript">
-    PickBackground()
+  PickBackground()
 </script>
 </html>
