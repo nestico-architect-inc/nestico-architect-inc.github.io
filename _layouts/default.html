@@ -28,8 +28,17 @@
 
   <link href="/assets/reset.css" rel="stylesheet">
 
+  <script type="text/javascript">
+    var numPics = 1;
+    function PickBackground()
+    {
+      var chosenPic = Math.ceil( Math.random() * numPics );
+      document.getElementById("full").style.backgroundImage = 'url(gallery/Photo'+chosenPic+'.jpg)';
+    }
+  </script>
+
 </head>
-<body>
+<body id="full">
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -40,7 +49,7 @@
       <div class="navbar-header">
         <a href="/" class="navbar-brand"><span class="impact">Nestico</span> Architect Inc.</a>
       </div>
-      <ul class="nav nav-pills">
+      <!-- <ul class="nav nav-pills">
         {% assign pages_array = site.pages | sort: 'order' %}
         {% for node in pages_array %}
           {% if node.layout == "default" %}
@@ -49,7 +58,7 @@
             </li>
           {% endif %}
         {% endfor %}
-      </ul>
+      </ul> -->
     </div>
   </header>
 
@@ -65,4 +74,7 @@
     </div>
   </footer>
 </body>
+<script type="text/javascript">
+    PickBackground()
+</script>
 </html>
