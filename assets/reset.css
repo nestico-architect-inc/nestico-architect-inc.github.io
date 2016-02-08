@@ -111,7 +111,7 @@ h2 {
 
 /* Centre columns in contact page */
 @media (max-width: 767px) {
-    .col-centered-contact {
+    .col-centered {
         text-align: center;
         position: relative;
     }
@@ -136,6 +136,14 @@ h2 {
         left: -20px;
     }
 }
+
+/* Keep container width the same above and below 1200px*/
+@media (min-width:1200px) {
+    .container {
+        width: 970px
+    }
+}
+
 /* Invisible glpyhs for spacing */
 .hide-glyph {
     color:rgba(255,255,255,0);
